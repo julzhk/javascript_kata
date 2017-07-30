@@ -8,20 +8,27 @@
 // h = 3, bounce = 1, window = 1.5, result is -1
 
 
-function bouncingBall(h,  bounce,  window, count=0) {
-  console.log('enter with h',h, ' ',window, ' ',count)
-  if (h>window)){
-  	count +=1
+function bouncingBall(h,  bounce, window, count=0) {
+//   if args out of bounds, return error signal
+  if ((h==window && count==0) || (h<=0) || (count>600) || (bounce>=1)){
+    return -1
   }
-  if (h<window){
+//   first drop passes the window once..
+  if ((h>window) && (count == 0)){
+  	count =1
+  }
+//   bounce is lower than the window, so return the number of bounces
+  if (h<=window){
     return count
   }
+//   bounce to a height of h * bounce 
   newheight = h*bounce
   if (newheight>window){
-    count +=1
+    count +=2
   }
   return bouncingBall(newheight,bounce,window,count)
 }
+
 
 
 
